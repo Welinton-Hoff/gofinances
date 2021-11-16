@@ -26,16 +26,33 @@ export interface DataListProps extends TransactionCardProps {
   id: string;
 }
 
+interface HighLightProps {
+  total: string;
+}
+
+interface HighLightData {
+  entries: HighLightProps;
+  expensives: HighLightProps;
+}
+
 export function Dashboard() {
 
   const [data, setData] = useState<DataListProps[]>([])
+  const [highLightData, setHighLightData] = useState<HighLightData>({} as HighLightData)
 
   async function loadTransaction() {
     const dataKey = '@gofinances:transactions'
     const response = await AsyncStorage.getItem(dataKey)
     const transactions = response ? JSON.parse(response) : []
 
+    let entriesTotal = 0;
+    let expeniveTotal = 0;
+
     const transactionsFormatted: DataListProps[] = transactions.map((item: DataListProps) => {
+
+      if (item.type === 'positive') entriesTotal += Number(item.amount)
+      else expeniveTotal += Number(item.amount)
+
       const amount = Number(item.amount).toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
@@ -58,6 +75,20 @@ export function Dashboard() {
     })
 
     setData(transactionsFormatted)
+    setHighLightData({
+      entries: {
+        total: entriesTotal.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+      },
+      expensives: {
+        total: expeniveTotal.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+      }
+    })
   }
 
   useEffect(() => {
