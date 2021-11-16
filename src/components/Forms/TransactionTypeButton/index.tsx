@@ -5,6 +5,7 @@ import {
   Container,
   Icon,
   Title,
+  Button
 } from './styles';
 
 const icons = {
@@ -21,15 +22,16 @@ interface Props extends RectButtonProps {
 export function TransactionTypeButton({ type, title, isActive, ...rest }: Props) {
   return (
     <Container
-      {...rest}
       isActive={isActive}
       type={type}
     >
-      <Icon
-        name={icons[type]}
-        type={type}
-      />
-      <Title>{title}</Title>
+      <Button {...rest}>
+        <Icon
+          name={icons[type]}
+          type={type}
+        />
+        <Title>{title}</Title>
+      </Button>
     </Container>
   );
 }
