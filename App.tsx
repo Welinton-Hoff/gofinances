@@ -1,3 +1,7 @@
+import 'react-native-gesture-handler'
+import 'intl'
+import 'intl/locale-data/jsonp/pt-BR'
+
 import React from 'react'
 import AppLoading from 'expo-app-loading'
 import { ThemeProvider } from 'styled-components/native'
@@ -15,10 +19,6 @@ import {
 
 import theme from './src/global/styles/theme'
 
-import { Register } from './src/screens/Register'
-import { Dashboard } from './src/screens/Dashboard'
-import { CategorySelect } from './src/screens/CategorySelect'
-
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -33,7 +33,6 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StatusBar barStyle="light-content" backgroundColor={theme.colors.PRIMARY_COLOR} />
-        {/* <Dashboard /> */}
         <AppRoutes />
       </NavigationContainer>
     </ThemeProvider>
