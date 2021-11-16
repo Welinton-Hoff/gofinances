@@ -27,12 +27,13 @@ export interface DataListProps extends TransactionCardProps {
 }
 
 interface HighLightProps {
-  total: string;
+  amount: string;
 }
 
 interface HighLightData {
   entries: HighLightProps;
   expensives: HighLightProps;
+  total: HighLightProps
 }
 
 export function Dashboard() {
@@ -75,15 +76,24 @@ export function Dashboard() {
     })
 
     setData(transactionsFormatted)
+
+    const total = entriesTotal - expeniveTotal
+
     setHighLightData({
       entries: {
-        total: entriesTotal.toLocaleString('pt-BR', {
+        amount: entriesTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
         })
       },
       expensives: {
-        total: expeniveTotal.toLocaleString('pt-BR', {
+        amount: expeniveTotal.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+      },
+      total: {
+        amount: total.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
         })
@@ -103,7 +113,6 @@ export function Dashboard() {
     <Container>
       <Header>
         <UserWrapper>
-
           <UserInfo>
             <Photo source={{ uri: 'https://github.com/Welinton-Hoff.png' }} />
             <User>
@@ -117,26 +126,25 @@ export function Dashboard() {
           </LogoutButton>
 
         </UserWrapper>
-
       </Header>
 
       <HighLightCards>
         <HighLightCard
           type="up"
           title="Entradas"
-          amount="R$ 17.400,00"
+          amount={highLightData.entries.amount}
           lastTransaction="Última entrada dia 12 de novembro"
         />
         <HighLightCard
           type="down"
           title="Saídas"
-          amount="R$ 1.259,00"
+          amount={highLightData.expensives.amount}
           lastTransaction="Última saída dia 11 de novembro"
         />
         <HighLightCard
           type="total"
           title="Total"
-          amount="R$ 16.141,00"
+          amount={highLightData.total.amount}
           lastTransaction="01 à 12 de novembro"
         />
       </HighLightCards>
