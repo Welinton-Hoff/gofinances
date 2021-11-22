@@ -101,7 +101,6 @@ function AuthProvider({ children }: AuthProviderProps) {
         };
 
         setUser(userLogged);
-        console.log(userLogged);
 
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
       }
@@ -120,7 +119,6 @@ function AuthProvider({ children }: AuthProviderProps) {
     async function loadUserStorageData() {
       const hasUserStoraged = await AsyncStorage.getItem(userStorageKey);
 
-      console.log(hasUserStoraged);
       if (hasUserStoraged) {
         const userLogged = JSON.parse(hasUserStoraged) as User;
         setUser(userLogged);
