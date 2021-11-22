@@ -123,8 +123,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       console.log(hasUserStoraged);
       if (hasUserStoraged) {
         const userLogged = JSON.parse(hasUserStoraged) as User;
-        //console.log(`asdasdasdasdasdasdasdasdas ${userLogged}`);
-        console.log(`${userStorageKey}`);
         setUser(userLogged);
       }
 
