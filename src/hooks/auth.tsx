@@ -94,13 +94,14 @@ function AuthProvider({ children }: AuthProviderProps) {
         const userPhoto = `https://ui-avatars.com/api/?name=${userName}&length=2`;
 
         const userLogged = {
-          id: String(credential.user),
+          id: String(credential.identityToken),
           name: userName,
           email: credential.email!,
           photo: userPhoto,
         };
 
         setUser(userLogged);
+        console.log(userLogged);
 
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
       }
@@ -117,11 +118,13 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     async function loadUserStorageData() {
-      const userStoraged = await AsyncStorage.getItem(userStorageKey);
+      const hasUserStoraged = await AsyncStorage.getItem(userStorageKey);
 
-      if (userStoraged) {
-        const userLogged = JSON.parse(userStoraged) as User;
-
+      console.log(hasUserStoraged);
+      if (hasUserStoraged) {
+        const userLogged = JSON.parse(hasUserStoraged) as User;
+        //console.log(`asdasdasdasdasdasdasdasdas ${userLogged}`);
+        console.log(`${userStorageKey}`);
         setUser(userLogged);
       }
 
