@@ -1,23 +1,22 @@
-import "react-native-gesture-handler";
 import "intl";
+import "react-native-gesture-handler";
 import "intl/locale-data/jsonp/pt-BR";
 
 import React from "react";
+import { StatusBar } from "react-native";
 import AppLoading from "expo-app-loading";
 import { ThemeProvider } from "styled-components/native";
-import { StatusBar } from "react-native";
-import { Routes } from "./src/routes";
 
+import { Routes } from "./src/routes";
+import theme from "./src/global/styles/theme";
 import { AuthProvider, useAuth } from "./src/hooks/auth";
 
 import {
   useFonts,
-  Poppins_400Regular,
-  Poppins_500Medium,
   Poppins_700Bold,
+  Poppins_500Medium,
+  Poppins_400Regular,
 } from "@expo-google-fonts/poppins";
-
-import theme from "./src/global/styles/theme";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
