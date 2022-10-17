@@ -20,14 +20,16 @@ import {
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_500Medium,
     Poppins_700Bold,
+    Poppins_500Medium,
+    Poppins_400Regular,
   });
 
   const { userStorageLoading } = useAuth();
 
-  if (!fontsLoaded || userStorageLoading) return <AppLoading />;
+  if (!fontsLoaded || userStorageLoading) {
+    return <AppLoading />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
