@@ -2,7 +2,6 @@ import { Feather } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { BorderlessButton } from "react-native-gesture-handler";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 export const Container = styled.View`
   flex: 1;
@@ -27,13 +26,7 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.SHAPE};
 `;
 
-export const Content = styled.ScrollView.attrs({
-  showsVerticalScrollIndicator: false,
-  contentContainerStyle: {
-    paddingHorizontal: 24,
-    paddingBottom: useBottomTabBarHeight(),
-  },
-})``;
+export const Content = styled.ScrollView``;
 
 export const ChartContainer = styled.View`
   width: 100%;

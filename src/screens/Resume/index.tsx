@@ -7,6 +7,7 @@ import { addMonths, subMonths, format } from "date-fns";
 import { useFocusEffect } from "@react-navigation/core";
 import { RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 import { useAuth } from "../../hooks/auth";
 import { categories } from "../../utils/categories";
@@ -155,7 +156,13 @@ export function Resume() {
             </MonthSelectButton>
           </MonthSelect>
 
-          <Content>
+          <Content
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingHorizontal: 24,
+              paddingBottom: useBottomTabBarHeight(),
+            }}
+          >
             <ChartContainer>
               <VictoryPie
                 y="total"
