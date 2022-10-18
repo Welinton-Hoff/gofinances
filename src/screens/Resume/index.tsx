@@ -7,7 +7,6 @@ import { addMonths, subMonths, format } from "date-fns";
 import { useFocusEffect } from "@react-navigation/core";
 import { RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 import { useAuth } from "../../hooks/auth";
 import { categories } from "../../utils/categories";
@@ -27,20 +26,20 @@ import {
 } from "./styles";
 
 interface TransactionData {
-  type: "positive" | "negative";
   name: string;
+  date: string;
   amount: string;
   category: String;
-  date: string;
+  type: "positive" | "negative";
 }
 
 interface CategoryData {
   key: string;
   name: string;
   total: number;
-  totalFormatted: string;
   color: string;
   percent: string;
+  totalFormatted: string;
 }
 
 export function Resume() {
@@ -52,10 +51,20 @@ export function Resume() {
 
   const theme = useTheme();
   const { user } = useAuth();
+  const VictoryPieStyle = {
+    labels: {
+      fontSize: RFValue(18),
+      fontWeight: "bold",
+      fill: theme.colors.SHAPE,
+    },
+  };
 
   function handleDateChange(action: "next" | "prev") {
-    if (action === "next") setSelectedDate(addMonths(selectedDate, 1));
-    else setSelectedDate(subMonths(selectedDate, 1));
+    if (action === "next") {
+      return setSelectedDate(addMonths(selectedDate, 1));
+    }
+
+    setSelectedDate(subMonths(selectedDate, 1));
   }
 
   async function loadData() {
@@ -125,6 +134,7 @@ export function Resume() {
       <Header>
         <Title>Resumo por categoria</Title>
       </Header>
+
       {isLoading ? (
         <LoadContainer>
           <ActivityIndicator color={theme.colors.PRIMARY_COLOR} size="large" />
@@ -145,35 +155,24 @@ export function Resume() {
             </MonthSelectButton>
           </MonthSelect>
 
-          <Content
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingHorizontal: 24,
-              paddingBottom: useBottomTabBarHeight(),
-            }}
-          >
+          <Content>
             <ChartContainer>
               <VictoryPie
-                data={totalByCategories}
-                x="percent"
                 y="total"
-                colorScale={totalByCategories.map((category) => category.color)}
-                style={{
-                  labels: {
-                    fontSize: RFValue(18),
-                    fontWeight: "bold",
-                    fill: theme.colors.SHAPE,
-                  },
-                }}
+                x="percent"
                 labelRadius={50}
+                style={VictoryPieStyle}
+                data={totalByCategories}
+                colorScale={totalByCategories.map((category) => category.color)}
               />
             </ChartContainer>
+
             {totalByCategories.map((item) => (
               <HistoryCard
                 key={item.key}
                 title={item.name}
-                amount={item.totalFormatted}
                 color={item.color}
+                amount={item.totalFormatted}
               />
             ))}
           </Content>
