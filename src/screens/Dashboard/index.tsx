@@ -1,34 +1,34 @@
-import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { HighLightCard } from "../../components/HighLightCard";
 import {
   TransactionCard,
   TransactionCardProps,
 } from "../../components/TransactionCard";
+import { HighLightCard } from "../../components/HighLightCard";
 
+import { useAuth } from "../../hooks/auth";
 import { useTheme } from "styled-components";
 
 import {
-  Container,
-  Header,
-  UserWrapper,
-  UserInfo,
-  Photo,
   User,
-  UserGreeting,
-  UserName,
   Icon,
-  HighLightCards,
-  Transactions,
+  Photo,
   Title,
-  TransactionsList,
+  Header,
+  UserInfo,
+  UserName,
+  Container,
+  UserWrapper,
   LogoutButton,
+  UserGreeting,
+  Transactions,
   LoadContainer,
+  HighLightCards,
+  TransactionsList,
 } from "./styles";
-import { useAuth } from "../../hooks/auth";
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -51,9 +51,9 @@ export function Dashboard() {
   const [highLightData, setHighLightData] = useState<HighLightData>(
     {} as HighLightData
   );
-  const { signOut, user } = useAuth();
 
   const theme = useTheme();
+  const { signOut, user } = useAuth();
 
   function getLastTransactionDate(
     collection: DataListProps[],

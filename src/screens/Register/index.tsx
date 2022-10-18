@@ -1,27 +1,26 @@
-import React, { useState } from "react";
-import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
 import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
-
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/core";
-
-import { InputForm } from "../../components/Forms/InputForm";
-import { Button } from "../../components/Forms/Button";
-import { TransactionTypeButton } from "../../components/Forms/TransactionTypeButton";
-import { CategorySelectButton } from "../../components/Forms/CategorySelectButton";
-import { CategorySelect } from "../CategorySelect";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
 
 import { useAuth } from "../../hooks/auth";
+import { CategorySelect } from "../CategorySelect";
+
+import { Button } from "../../components/Forms/Button";
+import { InputForm } from "../../components/Forms/InputForm";
+import { TransactionTypeButton } from "../../components/Forms/TransactionTypeButton";
+import { CategorySelectButton } from "../../components/Forms/CategorySelectButton";
 
 import {
-  Container,
-  Header,
-  Title,
   Form,
+  Title,
   Fields,
+  Header,
+  Container,
   TransactionTypes,
 } from "./styles";
 

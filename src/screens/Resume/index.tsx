@@ -1,31 +1,30 @@
-import React, { useCallback, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { VictoryPie } from "victory-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import { useTheme } from "styled-components";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { addMonths, subMonths, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { VictoryPie } from "victory-native";
+import { useTheme } from "styled-components";
 import { ActivityIndicator } from "react-native";
-
-import { HistoryCard } from "../../components/HistoryCard";
-import { categories } from "../../utils/categories";
+import React, { useCallback, useState } from "react";
+import { addMonths, subMonths, format } from "date-fns";
+import { useFocusEffect } from "@react-navigation/core";
+import { RFValue } from "react-native-responsive-fontsize";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 import { useAuth } from "../../hooks/auth";
+import { categories } from "../../utils/categories";
+import { HistoryCard } from "../../components/HistoryCard";
 
 import {
-  Container,
-  Header,
   Title,
-  Content,
-  ChartContainer,
-  MonthSelect,
-  MonthSelectButton,
-  MonthSelectIcon,
   Month,
+  Header,
+  Content,
+  Container,
+  MonthSelect,
   LoadContainer,
+  ChartContainer,
+  MonthSelectIcon,
+  MonthSelectButton,
 } from "./styles";
-import { useFocusEffect } from "@react-navigation/core";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -51,8 +50,8 @@ export function Resume() {
     []
   );
 
-  const { user } = useAuth();
   const theme = useTheme();
+  const { user } = useAuth();
 
   function handleDateChange(action: "next" | "prev") {
     if (action === "next") setSelectedDate(addMonths(selectedDate, 1));
