@@ -1,9 +1,9 @@
 import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
   useState,
+  ReactNode,
+  useEffect,
+  useContext,
+  createContext,
 } from "react";
 
 import * as AuthSession from "expo-auth-session";
@@ -26,17 +26,17 @@ interface User {
 
 interface IAuthContextData {
   user: User;
-  signInWithGoogle(): Promise<void>;
-  signInWithApple(): Promise<void>;
   signOut(): Promise<void>;
   userStorageLoading: boolean;
+  signInWithApple(): Promise<void>;
+  signInWithGoogle(): Promise<void>;
 }
 
 interface AuthorizationResponse {
+  type: string;
   params: {
     access_token: string;
   };
-  type: string;
 }
 
 const AuthContext = createContext({} as IAuthContextData);
@@ -62,18 +62,22 @@ function AuthProvider({ children }: AuthProviderProps) {
         const response = await fetch(
           `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`
         );
-        const userInfo = await response.json();
 
+        const userInfo = await response.json();
         const userLogged = {
-          id: String(userInfo.id),
-          name: userInfo.given_name,
           email: userInfo.email,
+          id: String(userInfo.id),
           photo: userInfo.picture,
+          name: userInfo.given_name,
         };
 
         setUser(userLogged);
 
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
+      } else {
+        throw new Error(
+          "Algo de inesperado ocorreu. Por favor tente novamente mais tarde."
+        );
       }
     } catch (error) {
       throw new Error(error as string);
@@ -94,14 +98,13 @@ function AuthProvider({ children }: AuthProviderProps) {
         const userPhoto = `https://ui-avatars.com/api/?name=${userName}&length=2`;
 
         const userLogged = {
-          id: String(credential.identityToken),
           name: userName,
-          email: credential.email!,
           photo: userPhoto,
+          email: credential.email!,
+          id: String(credential.identityToken),
         };
 
         setUser(userLogged);
-
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
       }
     } catch (error) {
@@ -111,7 +114,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signOut() {
     setUser({} as User);
-
     await AsyncStorage.removeItem(userStorageKey);
   }
 
@@ -134,9 +136,9 @@ function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         user,
-        signInWithGoogle,
-        signInWithApple,
         signOut,
+        signInWithApple,
+        signInWithGoogle,
         userStorageLoading,
       }}
     >
