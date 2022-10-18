@@ -119,8 +119,8 @@ export function Register() {
               name="name"
               control={control}
               placeholder="Nome"
-              autoCapitalize="sentences"
               autoCorrect={false}
+              autoCapitalize="sentences"
               error={errors.name && errors.name.message}
             />
 
@@ -136,15 +136,15 @@ export function Register() {
               <TransactionTypeButton
                 type="up"
                 title="Income"
-                onPress={() => handleTransactionTypeSelect("positive")}
                 isActive={transactionType === "positive"}
+                onPress={() => handleTransactionTypeSelect("positive")}
               />
 
               <TransactionTypeButton
                 type="down"
                 title="Outcome"
-                onPress={() => handleTransactionTypeSelect("negative")}
                 isActive={transactionType === "negative"}
+                onPress={() => handleTransactionTypeSelect("negative")}
               />
             </TransactionTypes>
 

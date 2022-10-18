@@ -1,6 +1,6 @@
 import React from "react";
-import { RectButtonProps } from "react-native-gesture-handler";
 import Svg, { SvgProps } from "react-native-svg";
+import { RectButtonProps } from "react-native-gesture-handler";
 
 import { Button, ImageContainer, Text } from "./styles";
 

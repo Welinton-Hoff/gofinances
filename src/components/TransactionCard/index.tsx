@@ -1,38 +1,37 @@
-import React from 'react';
-import { categories } from '../../utils/categories';
+import React from "react";
+import { categories } from "../../utils/categories";
 
 import {
-  Container,
+  Date,
+  Icon,
   Title,
   Amount,
   Footer,
   Category,
-  Icon,
+  Container,
   CategoryName,
-  Date
-} from './styles';
+} from "./styles";
 
 export interface TransactionCardProps {
-  type: 'positive' | 'negative';
   name: string;
+  date: string;
   amount: string;
   category: String;
-  date: string;
+  type: "positive" | "negative";
 }
 
 interface Props {
-  data: TransactionCardProps
+  data: TransactionCardProps;
 }
 
 export function TransactionCard({ data }: Props) {
-
-  const [category] = categories.filter(item => item.key === data.category)
+  const [category] = categories.filter((item) => item.key === data.category);
 
   return (
     <Container>
       <Title>{data.name}</Title>
       <Amount type={data.type}>
-        {data.type === 'negative' && '- '}
+        {data.type === "negative" && "- "}
         {data.amount}
       </Amount>
 
@@ -44,7 +43,6 @@ export function TransactionCard({ data }: Props) {
 
         <Date>{data.date}</Date>
       </Footer>
-
     </Container>
   );
 }

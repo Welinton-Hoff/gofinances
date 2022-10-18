@@ -1,11 +1,10 @@
 import React from "react";
-
 import { Container, Title, Amount } from "./styles";
 
 interface Props {
   title: string;
-  amount: string;
   color: string;
+  amount: string;
 }
 
 export function HistoryCard({ title, amount, color }: Props) {
