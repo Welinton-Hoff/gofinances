@@ -2,10 +2,15 @@ import React, { Fragment } from "react";
 import { VictoryPie } from "victory-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
+import { useTheme } from "styled-components";
 import { HistoryCard } from "../../../../components/HistoryCard";
 
-import { ChartContainer } from "./styles";
-import { useTheme } from "styled-components";
+import {
+  ChartContainer,
+  EmptyIcon,
+  EmptyMessage,
+  EmptyContent,
+} from "./styles";
 
 export interface CategoryData {
   key: string;
@@ -24,35 +29,42 @@ export function Graphic({ data }: GraphicProps) {
   const theme = useTheme();
   const VictoryPieStyle = {
     labels: {
-      fontSize: RFValue(18),
       fontWeight: "bold",
+      fontSize: RFValue(14),
       fill: theme.colors.SHAPE,
     },
   };
 
-  console.log("data => ", data);
+  if (!!data && data.length > 0) {
+    return (
+      <Fragment>
+        <ChartContainer>
+          <VictoryPie
+            y="total"
+            x="percent"
+            data={data}
+            labelRadius={50}
+            style={VictoryPieStyle}
+            colorScale={data.map((category) => category.color)}
+          />
+        </ChartContainer>
+
+        {data.map((item) => (
+          <HistoryCard
+            key={item.key}
+            title={item.name}
+            color={item.color}
+            amount={item.totalFormatted}
+          />
+        ))}
+      </Fragment>
+    );
+  }
 
   return (
-    <Fragment>
-      <ChartContainer>
-        <VictoryPie
-          y="total"
-          x="percent"
-          data={data}
-          labelRadius={50}
-          style={VictoryPieStyle}
-          colorScale={data.map((category) => category.color)}
-        />
-      </ChartContainer>
-
-      {data.map((item) => (
-        <HistoryCard
-          key={item.key}
-          title={item.name}
-          color={item.color}
-          amount={item.totalFormatted}
-        />
-      ))}
-    </Fragment>
+    <EmptyContent>
+      <EmptyIcon />
+      <EmptyMessage>Nenhum resumo encontrado para este período</EmptyMessage>
+    </EmptyContent>
   );
 }
