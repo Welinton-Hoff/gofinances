@@ -1,8 +1,10 @@
-import { RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native'
-import { Feather } from '@expo/vector-icons'
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import theme from '../../global/styles/theme';
+import { FlatList } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import styled from "styled-components/native";
+import { RFValue } from "react-native-responsive-fontsize";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import theme from "../../global/styles/theme";
 
 interface CategoryProps {
   isActive: boolean;
@@ -24,6 +26,11 @@ export const Header = styled.View`
   padding-bottom: 19px;
 `;
 
+export const CategoryList = styled.FlatList`
+  flex: 1;
+  width: 100%;
+` as unknown as typeof FlatList;
+
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.REGULAR};
   font-size: ${RFValue(18)}px;
@@ -39,8 +46,7 @@ export const Category = styled.TouchableOpacity<CategoryProps>`
   align-items: center;
 
   background-color: ${({ isActive }) =>
-    isActive ? theme.colors.SECUNDARY_COLOR_LIGHT : theme.colors.BACKGROUND
-  };
+    isActive ? theme.colors.SECUNDARY_COLOR_LIGHT : theme.colors.BACKGROUND};
 `;
 
 export const Icon = styled(Feather)`
