@@ -1,12 +1,9 @@
-import { Platform, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 import { BorderlessButton } from "react-native-gesture-handler";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 import { DataListProps } from ".";
 
@@ -17,19 +14,19 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height: ${RFPercentage(42)}PX;
-  background-color: ${({ theme }) => theme.colors.PRIMARY_COLOR};
-  justify-content: center;
   align-items: center;
   flex-direction: row;
+  justify-content: center;
+  height: ${RFPercentage(42)}PX;
+  background-color: ${({ theme }) => theme.colors.PRIMARY_COLOR};
 `;
 
 export const UserWrapper = styled.View`
   width: 100%;
 
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   padding: 0 24px;
   margin-top: ${RFValue(28)}px;
@@ -42,9 +39,9 @@ export const UserInfo = styled.View`
 `;
 
 export const Photo = styled.Image`
+  border-radius: 10px;
   width: ${RFValue(48)}px;
   height: ${RFValue(48)}px;
-  border-radius: 10px;
 `;
 
 export const User = styled.View`
@@ -52,20 +49,20 @@ export const User = styled.View`
 `;
 
 export const UserGreeting = styled.Text`
-  color: ${({ theme }) => theme.colors.SHAPE};
   font-size: ${RFValue(18)}px;
+  color: ${({ theme }) => theme.colors.SHAPE};
   font-family: ${({ theme }) => theme.fonts.REGULAR};
 `;
 
 export const UserName = styled.Text`
-  color: ${({ theme }) => theme.colors.SHAPE};
   font-size: ${RFValue(18)}px;
+  color: ${({ theme }) => theme.colors.SHAPE};
   font-family: ${({ theme }) => theme.fonts.BOLD};
 `;
 
 export const Icon = styled(Feather)`
-  color: ${({ theme }) => theme.colors.SECUNDARY_COLOR};
   font-size: ${RFValue(24)}px;
+  color: ${({ theme }) => theme.colors.SECUNDARY_COLOR};
 `;
 
 export const LogoutButton = styled(BorderlessButton)``;
@@ -87,9 +84,9 @@ export const Transactions = styled.View`
 `;
 
 export const Title = styled.Text`
+  margin-bottom: 16px;
   font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.fonts.REGULAR};
-  margin-bottom: 16px;
 `;
 
 export const TransactionsList = styled(
@@ -103,6 +100,6 @@ export const TransactionsList = styled(
 
 export const LoadContainer = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 `;

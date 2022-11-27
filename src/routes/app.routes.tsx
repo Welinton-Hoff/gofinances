@@ -1,41 +1,44 @@
 import React from "react";
 import { Platform } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
+
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 
 import { useTheme } from "styled-components";
 
-import { Dashboard } from "../screens/Dashboard";
-import { Register } from "../screens/Register";
 import { Resume } from "../screens/Resume";
+import { Register } from "../screens/Register";
+import { Dashboard } from "../screens/Dashboard";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export function AppRoutes() {
   const theme = useTheme();
+  const screenOptions: BottomTabNavigationOptions = {
+    headerShown: false,
+    tabBarLabelPosition: "beside-icon",
+    tabBarInactiveTintColor: theme.colors.TEXT,
+    tabBarActiveTintColor: theme.colors.SECUNDARY_COLOR,
+    tabBarStyle: {
+      height: 65,
+      paddingVertical: Platform.OS === "ios" ? 5 : 0,
+    },
+  };
 
   return (
-    <Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: theme.colors.SECUNDARY_COLOR,
-        tabBarInactiveTintColor: theme.colors.TEXT,
-        tabBarLabelPosition: "beside-icon",
-        tabBarStyle: {
-          height: 60,
-          paddingVertical: Platform.OS === "ios" ? 20 : 0,
-        },
-      }}
-    >
+    <Navigator screenOptions={screenOptions}>
       <Screen
         name="Listagem"
         component={Dashboard}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons
-              name="format-list-bulleted"
               size={size}
               color={color}
+              name="format-list-bulleted"
             />
           ),
         }}

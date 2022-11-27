@@ -28,11 +28,6 @@ export const Title = styled.Text`
 
 export const Content = styled.ScrollView``;
 
-export const ChartContainer = styled.View`
-  width: 100%;
-  align-items: center;
-`;
-
 export const MonthSelect = styled.View`
   width: 100%;
 

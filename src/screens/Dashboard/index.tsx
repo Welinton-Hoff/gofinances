@@ -1,6 +1,6 @@
 import { ActivityIndicator } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
@@ -182,7 +182,7 @@ export function Dashboard() {
           <ActivityIndicator color={theme.colors.PRIMARY_COLOR} size="large" />
         </LoadContainer>
       ) : (
-        <>
+        <Fragment>
           <Header>
             <UserWrapper>
               <UserInfo>
@@ -229,7 +229,7 @@ export function Dashboard() {
               renderItem={({ item }) => <TransactionCard data={item} />}
             />
           </Transactions>
-        </>
+        </Fragment>
       )}
     </Container>
   );
